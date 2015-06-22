@@ -55,5 +55,7 @@ app.use(function(err, req, res, next) {
   });
 });
 
+app.locals.title = 'Quiz 2015',
+app.locals.description = 'El portal donde podrá crear sus propios juegos';
 
 module.exports = app;
