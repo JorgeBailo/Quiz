@@ -1,5 +1,14 @@
-<table>
-<% var i; for (i=0; i < quizes.length; i++) { %>
-  <tr><td><a href="quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a></td></tr>
+<form method="get" action="/quizes">
+      <input type="text" name="search" placeholder="Busque una pregunta"/>
+      <input type="submit" value="buscar"/>
+</form>
+
+<% if (quizes.length > 1) { %>  
+  <table>
+  <% var i; for (i=0; i < quizes.length; i++) { %>
+    <tr><td><a href="quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a></td></tr>
+  <% } %>
+  </table>
+<% } else { %>
+  <p> No se han encontrado preguntas </p>
 <% } %>
-</table>
