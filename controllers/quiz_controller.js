@@ -43,7 +43,8 @@ exports.index = function(req, res, next) {
       }
     ).catch( function(error){ next(error) });
   } else {
-    models.Quiz.findAll({where:["pregunta like ?", "%"+req.query.search.replace(/\s/g,"%")+"%"], order: 'pregunta ASC'}).then(
+      var filtro  = (req.query.search || '').replace(" ", "%");
+      models.Quiz.findAll({where:["pregunta like ?", '%'+filtro+'%'],order:'pregunta ASC'}).then(
       function(quizes) {
         res.render('quizes/index', { quizes: quizes, errors: [] });
       }
@@ -108,6 +109,6 @@ exports.update = function(req, res, next) {
 exports.destroy = function(req, res, next) {
   req.quiz.destroy().then(
     function() {
-      res.redirect("/quizes");
+      res.redirect('/quizes');
   }).catch(function(error){ next(error) });
 };

@@ -1,3 +1,4 @@
-<p><%= respuesta %></p>
-
-<a href="/quizes"> Intentelo otra vez </a>
+<div class="alert <% if (respuesta == "Correcto") { %> alert-success <% } else { %> alert-danger <% } %></p>">
+  <p><%= respuesta %></p>
+</div>
+<a href="/quizes/<%= quiz.id %>"> Intentelo otra vez </a>
