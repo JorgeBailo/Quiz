@@ -61,6 +61,7 @@ app.use(function(err, req, res, next) {
 
 app.locals.title = 'Quiz 2015',
 app.locals.description = 'El portal donde podrá crear sus propios juegos';
-app.locals.author = 'Jorge Bailo'
+app.locals.author = 'Jorge Bailo';
+app.locals.temas = { otro: 'Otro', humanidades: 'Humanidades', ocio: 'Ocio', ciencia: 'Ciencia', tecnologia: 'Tecnología', geografia: 'Geografía'};
 
 module.exports = app;
