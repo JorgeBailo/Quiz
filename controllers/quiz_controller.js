@@ -8,7 +8,7 @@ exports.show = function(req, res) {
 // GET /quizes/:id/answer
 exports.answer = function(req, res) {
   var resultado = 'Incorrecto';
-  if (req.query.respuesta === req.quiz.respuesta) {
+  if (req.query.respuesta.toLowerCase() === req.quiz.respuesta.toLowerCase()) {
     resultado = 'Correcto';
   }
   res.render(
@@ -44,7 +44,7 @@ exports.index = function(req, res, next) {
     ).catch( function(error){ next(error) });
   } else {
       var filtro  = (req.query.search || '').replace(" ", "%");
-      models.Quiz.findAll({where:["pregunta like ?", '%'+filtro+'%'],order:'pregunta ASC'}).then(
+      models.Quiz.findAll({where:["lower(pregunta) like ?", '%'+filtro+'%'],order:'pregunta ASC'}).then(
       function(quizes) {
         res.render('quizes/index', { quizes: quizes, errors: [] });
       }
