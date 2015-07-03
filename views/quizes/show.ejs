@@ -1,8 +1,35 @@
 <h3><%= quiz.pregunta %></h3>
 
-<form action="/quizes/<%= quiz.id %>/answer" method="GET" class="form-inline">
-    <div class="form-group">
+<div class="row">
+  <div class="col-lg-6">
+    <div id="thanks" class="alert alert-success" style="display:none"></div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-8">
+    <form action="/quizes/<%= quiz.id %>/answer" method="GET" class="form-inline">
+      <div class="form-group">
         <input type="text" class="form-control" name="respuesta" placeholder="Responder...">
-    </div>
-    <button type="submit" class="btn btn-default">Comprobar</button>
-</form>
+      </div>
+      <button type="submit" class="btn btn-default">Comprobar</button>
+      <a href="#commentModal" role="button" class="btn btn-large btn-primary" data-toggle="modal">Comentar</a>
+    </form>
+  </div>
+</div>
+
+<% include ../comments/_form.ejs %>
+
+<br />
+
+<div class="row">
+  <div class="col-lg-8">
+    <p><strong>Comentarios:</strong></p>
+      <dl class="dl-horizontal">
+      <% for(index in quiz.Comments){ %>
+          <dt> <%= moment(quiz.Comments[index].createdAt).format("DD-MM-YYYY HH:mm") %> : </dt>
+          <dd> <%= quiz.Comments[index].texto %> </dd>
+      <% } %>
+      </dl>
+  </div>
+</div>

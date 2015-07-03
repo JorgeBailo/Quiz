@@ -1,8 +1,9 @@
 var models = require('../models/models.js');
+var moment = require('moment');
 
 // GET /quizes/:id
 exports.show = function(req, res) {
-  res.render('quizes/show', { quiz: req.quiz, errors: []});
+  res.render('quizes/show', { quiz: req.quiz, moment: moment, errors: []});
 };
 
 // GET /quizes/:id/answer
@@ -23,6 +24,9 @@ exports.load = function(req, res, next, quizId) {
             where: {
                 id: Number(quizId)
             },
+            include: [{
+                model: models.Comment
+            }]
         }).then(function(quiz) {
         if (quiz) {
           req.quiz = quiz;
