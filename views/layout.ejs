@@ -47,6 +47,13 @@
                       <li><a href="/quizes">Preguntas</a></li>
                       <li><a href="/author">Autor</a></li>
                   </ul>
+                  <ul class="nav navbar-nav navbar-right">
+                    <%if(!session.user){ %>
+                      <li><a href="/login">Login</a></li>
+                    <% } else { %>
+                      <li><a href="/logout"><%=session.user.username %> | Logout</a>
+                    <% } %>
+                  </ul>
               </div>
           </div>
       </nav>

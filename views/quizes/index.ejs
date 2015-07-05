@@ -29,11 +29,13 @@
             <tr>
               <td><a href="quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a></td>
               <td><%= temas[quizes[i].tema] %></td>
+              <% if(session.user){ %>
               <td><a class="btn btn-warning" role="button" href="quizes/<%= quizes[i].id %>/edit">Editar</a></td>
               <td>
                 <form method="post" action="/quizes/<%= quizes[i].id %>?_method=delete">
                   <button class="btn btn-danger" type="submit" onClick="return confirm('Comfirme que desea borrar: <%= quizes[i].pregunta %> - <%= quizes[i].respuesta %>');">Borrar</button>
                 </form>
+              <% } %>
             </tr>
           <% } %>
         </tbody>
@@ -44,8 +46,10 @@
   </div>
 </div>
 
+<% if(session.user){ %>
 <div class="row">
   <div class="col-lg-4">
     <a href="/quizes/new" class="btn btn-primary" role="button">Crear pregunta</a>
   </div>
 </div>
+<% } %>
