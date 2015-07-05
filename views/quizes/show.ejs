@@ -25,11 +25,26 @@
 <div class="row">
   <div class="col-lg-8">
     <p><strong>Comentarios:</strong></p>
-      <dl class="dl-horizontal">
-      <% for(index in quiz.Comments){ %>
-          <dt> <%= moment(quiz.Comments[index].createdAt).format("DD-MM-YYYY HH:mm") %> : </dt>
-          <dd> <%= quiz.Comments[index].texto %> </dd>
-      <% } %>
-      </dl>
+      <table class="table table-striped table-condensed">
+        <tbody>
+        <% for(index in quiz.Comments){ %>
+          <% if (quiz.Comments[index].publicado || session.user) { %>
+          <tr>
+            <td><%= moment(quiz.Comments[index].createdAt).format("DD-MM-YYYY HH:mm") %></td>
+            <td><%= quiz.Comments[index].texto %></td>
+              <% if(session.user && !quiz.Comments[index].publicado) { %>
+              <td>
+                  <a href="/quizes/<%=quiz.id%>/comments/<%=quiz.Comments[index].id %>/publish" role="button" class="btn btn-large btn-success">Publicar</a>
+              </td>
+              <% }%>
+              <% if(session.user && quiz.Comments[index].publicado) { %>
+              <td>
+                  <a href="/quizes/<%=quiz.id%>/comments/<%=quiz.Comments[index].id %>/unpublish" role="button" class="btn btn-large btn-danger">Despublicar</a>
+              </td>
+              <% }%>
+          </tr>
+          <% } %>
+        <% } %>
+      </table>
   </div>
 </div>
